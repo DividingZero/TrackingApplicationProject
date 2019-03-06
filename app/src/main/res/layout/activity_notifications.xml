@@ -6,17 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".notifications">
 
-    <ScrollView
-        android:id="@+id/notifications_scrollviewID"
+    <ListView
+        android:id="@+id/notifications_ListViewID"
         android:layout_width="379dp"
         android:layout_height="699dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="16dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
