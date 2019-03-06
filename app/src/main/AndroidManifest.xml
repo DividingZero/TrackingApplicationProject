@@ -4,6 +4,9 @@
 
     <uses-feature android:name="android.hardware.sensor.stepcounter" />
     <uses-feature android:name="android.hardware.sensor.stepdetector" />
+    <uses-feature android:name="@string/step_detector" android:required="false"/>
+
+    <uses-feature android:name="@string/step_counter" android:required="false"/>
 
     <application
         android:allowBackup="true"
