@@ -8,6 +8,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,8 +24,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener  {
-    TextView stepcount;
-
+    TextView stepcount, kilometers, calories, timerunning, averagespeed;
+    public static long startTime;
     SensorManager sensorManager;
 
     boolean running = false;
@@ -35,7 +36,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView date = (TextView)findViewById(R.id.currentDate);
+        startTime = SystemClock.elapsedRealtime();
         stepcount = (TextView) findViewById(R.id.stepCount);
+        kilometers = (TextView) findViewById(R.id.Kilometers);
+        calories = (TextView) findViewById(R.id.cal);
+        timerunning = (TextView) findViewById(R.id.timerunning);
+        averagespeed = (TextView) findViewById(R.id.averagespeed);
         Log.d("Debug", "onCreate method");
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         setDate(date);
@@ -86,6 +92,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Log.d("Debug", "onSensorChanged method");
         if(running){
             stepcount.setText(String.valueOf(event.values[0]));
+            kilometers.setText(String.valueOf(event.values[0]/1312) + " km");
+            calories.setText(String.valueOf(event.values[0]*0.05) + " cal");
+            timerunning.setText(String.valueOf((SystemClock.elapsedRealtime() - startTime) / 1000 + " s"));
+            averagespeed.setText(String.valueOf((event.values[0]/1312)/((SystemClock.elapsedRealtime() - startTime) / 1000)) + " km/s");
+
+
         }
     }
 
@@ -98,4 +110,3 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 }
-

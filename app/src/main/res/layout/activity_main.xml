@@ -71,31 +71,30 @@
 
     <View
         android:id="@+id/myRectangleView3"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="49dp"
-        android:layout_marginStart="86dp"
-        android:layout_marginLeft="86dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="174dp"
         android:background="@drawable/rectangle"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
 
     <View
         android:id="@+id/myRectangleView4"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="49dp"
-        android:layout_marginStart="86dp"
-        android:layout_marginLeft="86dp"
+        android:layout_marginStart="50dp"
         android:background="@drawable/rectangle"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myRectangleView3" />
 
     <View
         android:id="@+id/myRectangleView5"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="49dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -104,17 +103,13 @@
 
     <View
         android:id="@+id/myRectangleView6"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="49dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/rectangle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/myRectangleView3"
+        app:layout_constraintStart_toEndOf="@+id/myRectangleView3"
         app:layout_constraintTop_toBottomOf="@+id/stepCount" />
 
     <View
@@ -172,14 +167,70 @@
 
     <TextView
         android:id="@+id/stepCount"
-        android:layout_width="253dp"
-        android:layout_height="113dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:textSize="100sp"
+        android:layout_marginBottom="8dp"
+        android:text="70000"
+        android:textAlignment="center"
+        android:textSize="75sp"
         app:layout_constraintBottom_toBottomOf="@+id/myRectangleView2"
         app:layout_constraintEnd_toEndOf="@+id/myRectangleView2"
         app:layout_constraintStart_toStartOf="@+id/myRectangleView2"
         app:layout_constraintTop_toTopOf="@+id/myRectangleView2" />
+
+    <TextView
+        android:id="@+id/Kilometers"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="km"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/myRectangleView4"
+        app:layout_constraintEnd_toStartOf="@+id/myRectangleView6"
+        app:layout_constraintStart_toStartOf="@+id/myRectangleView3"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView3" />
+
+    <TextView
+        android:id="@+id/cal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="kcal"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="@+id/myRectangleView6"
+        app:layout_constraintEnd_toEndOf="@+id/myRectangleView6"
+        app:layout_constraintStart_toEndOf="@+id/Kilometers"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView6" />
+
+    <TextView
+        android:id="@+id/timerunning"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="time running"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="@+id/myRectangleView4"
+        app:layout_constraintEnd_toStartOf="@+id/myRectangleView5"
+        app:layout_constraintStart_toStartOf="@+id/myRectangleView4"
+        app:layout_constraintTop_toBottomOf="@+id/Kilometers" />
+
+    <TextView
+        android:id="@+id/averagespeed"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="speed"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="@+id/myRectangleView5"
+        app:layout_constraintEnd_toEndOf="@+id/myRectangleView5"
+        app:layout_constraintStart_toEndOf="@+id/timerunning"
+        app:layout_constraintTop_toBottomOf="@+id/cal" />
 
 </android.support.constraint.ConstraintLayout>
