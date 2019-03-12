@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             kilometers.setText(String.valueOf(event.values[0]/1312) + " km");
             calories.setText(String.valueOf(event.values[0]*0.05) + " cal");
             timerunning.setText(String.valueOf((SystemClock.elapsedRealtime() - startTime) / 1000 + " s"));
-            averagespeed.setText(String.valueOf((event.values[0]/1312)/((SystemClock.elapsedRealtime() - startTime) / 1000)) + " km/s");
+            averagespeed.setText(String.valueOf(((event.values[0]/1312)/((SystemClock.elapsedRealtime() - startTime) / 1000) * 3600 )) + " km/h");
 
 
         }
