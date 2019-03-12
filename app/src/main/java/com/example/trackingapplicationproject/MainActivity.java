@@ -1,7 +1,5 @@
 package com.example.trackingapplicationproject;
 
-import android.app.Activity;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -17,8 +15,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     TextView stepcount, kilometers, calories, timerunning, averagespeed;
     public static long startTime;
     SensorManager sensorManager;
+    private float stepValue, achievement;
 
     boolean running = false;
     private Button notifications_button;
@@ -35,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        achievement = 1000;
         TextView date = (TextView)findViewById(R.id.currentDate);
         startTime = SystemClock.elapsedRealtime();
         stepcount = (TextView) findViewById(R.id.stepCount);
@@ -91,6 +89,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         Log.d("Debug", "onSensorChanged method");
         if(running){
+
+            stepValue = event.values[0];
+            if(stepValue>achievement){
+
+                Notifications not = new Notifications();
+
+                not.displayNotificationOne("Congratulations!", "Congratulations for reaching " + achievement + " steps!");
+                achievement *= 10;
+            }
             stepcount.setText(String.valueOf(event.values[0]));
             kilometers.setText(String.valueOf(event.values[0]/1312) + " km");
             calories.setText(String.valueOf(event.values[0]*0.05) + " cal");
@@ -98,11 +105,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             averagespeed.setText(String.valueOf(((event.values[0]/1312)/((SystemClock.elapsedRealtime() - startTime) / 1000) * 3600 )) + " km/h");
 
 
+
         }
     }
 
     public void openNotifications() {
-        Intent intent = new Intent(this, notifications.class);
+        Intent intent = new Intent(this, Notifications.class);
         startActivity(intent);
     }
     @Override

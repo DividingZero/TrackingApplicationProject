@@ -13,13 +13,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class notifications extends AppCompatActivity {
+public class Notifications extends AppCompatActivity {
     //private ListView list_view;
     private NotificationManager myNotificationManager;
     private int notificationIdOne = 111;
     private int notificationIdTwo = 112;
     private int numMessagesOne = 0;
     private int numMessagesTwo = 0;
+    private String dummyTitle = "TitleNotFound!";
+    private String dummyMessage = "MessageNotFound!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class notifications extends AppCompatActivity {
         Button notOneBtn = (Button) findViewById(R.id.notificationOne);
         notOneBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                displayNotificationOne();
+                displayNotificationOne(dummyTitle, dummyMessage);
             }
         });
 
@@ -42,12 +44,12 @@ public class notifications extends AppCompatActivity {
         });
     }
 
-    protected void displayNotificationOne() {
+    protected void displayNotificationOne(String title, String message) {
         //default notification service
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "noti1");
 
-        mBuilder.setContentTitle("New Message with explicit intent");
-        mBuilder.setContentTitle("New message from psykoosi received");
+        mBuilder.setContentTitle(title);
+        mBuilder.setContentTitle(message);
         mBuilder.setTicker("Explicit: New Message Received!");
         mBuilder.setSmallIcon(R.drawable.ic_launcher_background); //place holder icon
 
