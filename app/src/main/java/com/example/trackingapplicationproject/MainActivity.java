@@ -1,7 +1,9 @@
 package com.example.trackingapplicationproject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -24,11 +26,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public static long startTime;
     SensorManager sensorManager;
     private float stepValue, timeValue;
+    private static final String PREF = "TestPref";
     private String congratulationsMessage;
     public static float achievement = 100;
-
+    private SharedPreferences prefGet;
+    private Saver saver ;
     boolean running = false;
     private Button notifications_button;
+    private SensorEvent sensorEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +50,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Log.d("Debug", "onCreate method");
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         setDate(date);
-
+        prefGet =getSharedPreferences(PREF, Activity.MODE_PRIVATE);
+        saver=new Saver(prefGet);
+        stepValue= saver.dailyGet();
         notifications_button = (Button) findViewById(R.id.button8);
+
         notifications_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        sensorEvent=event;
         Log.d("Debug", "onSensorChanged method");
         if(running){
             timeValue = (SystemClock.elapsedRealtime() - startTime);
@@ -107,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 timerunning.setText(String.valueOf((((SystemClock.elapsedRealtime() - startTime) / 1000) / 60) / 60 + " h"));
 
             }
-            stepValue = event.values[0];
+            stepValue += event.values[0];
             if(stepValue>achievement){
 
                 achievement *= 10;
@@ -131,4 +140,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+    @Override
+    public void onDestroy(){
+
+        super.onDestroy();
+        Date today = Calendar.getInstance().getTime();//getting date
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");//formatting the date
+        String date = formatter.format(today);
+
+        String first="";
+        first+=date.charAt(0)+date.charAt(1);
+        saver.monthlySave(stepValue);
+        saver.dailySave(stepValue);
+        reset(sensorEvent);
+
+
+
+
+
+    }
+    public void reset( SensorEvent event){
+        event.values[0]=0;
+    }
+
 }
