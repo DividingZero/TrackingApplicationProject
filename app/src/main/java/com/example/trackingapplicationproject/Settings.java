@@ -33,6 +33,9 @@ public class Settings extends AppCompatActivity {
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
+
+
+
         ageButton.setOnClickListener(
                 new View.OnClickListener()
                 {

@@ -113,8 +113,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         sensorEvent = event;
         Log.d("Debug", "onSensorChanged method");
-        DecimalFormat df = new DecimalFormat("#.00");
-        DecimalFormat dftwo = new DecimalFormat("#");
 
 
         if (running) {
@@ -172,7 +170,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     kilometers.setText(String.valueOf(distanceCast / 1000) + " km");
 
                 }
-                calorieCast = (int) (distanceCast/1000);
+                calorieCast = distanceCast/1000;
+                if(weightInput==0){
+
+                    weightInput = 60;
+
+                }
                 calories.setText(String.valueOf(calorieCast * 0.91 * weightInput) + " cal");
                 speedCast = (int) ((event.values[0] / 1312) / ((SystemClock.elapsedRealtime() - startTime) / 1000) * 3600);
                 averagespeed.setText(String.valueOf(speedCast) + " km/h");
