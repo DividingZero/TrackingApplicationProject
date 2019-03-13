@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     kilometers.setText(String.valueOf(distanceCast / 1000) + " km");
 
                 }
-                calorieCast = (int) (distanceCast);
+                calorieCast = (int) (distanceCast/1000);
                 calories.setText(String.valueOf(calorieCast * 0.91 * weightInput) + " cal");
                 speedCast = (int) ((event.values[0] / 1312) / ((SystemClock.elapsedRealtime() - startTime) / 1000) * 3600);
                 averagespeed.setText(String.valueOf(speedCast) + " km/h");
