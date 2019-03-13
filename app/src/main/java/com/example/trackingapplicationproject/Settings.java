@@ -10,32 +10,36 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class Settings extends AppCompatActivity {
-
+    // Defining class variables and instances
     private Button ageButton, heightButton, weightButton;
     private EditText ageInput, heightInput, weightInput;
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "MyPrefs" ;
 
+
+    // Creating the layout and assigning it to activity_settings
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
 
-
+        // Setting the buttons to instance variables
         ageButton = (Button) findViewById(R.id.ageButton);
         heightButton = (Button) findViewById(R.id.heightButton);
         weightButton = (Button) findViewById(R.id.weightButton);
 
+        // Setting EditText widgets to instance variables
         ageInput = (EditText)findViewById(R.id.ageInput);
         heightInput = (EditText)findViewById(R.id.heightInput);
         weightInput = (EditText)findViewById(R.id.weightInput);
 
+        // Initializing sharedpreferences with context MODE_PRIVATE
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
 
 
-
+        // Setting OnClickListener for ageButton that's point is to validate and commit the user input
         ageButton.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -48,6 +52,8 @@ public class Settings extends AppCompatActivity {
 
                     }
                 });
+
+        // Setting OnClickListener for heightButton that's point is to validate and commit the user input
         heightButton.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -59,6 +65,8 @@ public class Settings extends AppCompatActivity {
                         MainActivity.heightInput = Integer.valueOf(heightInput.getText().toString());
                     }
                 });
+
+        // Setting OnClickListener for weightButton that's point is to validate and commit the user input
         weightButton.setOnClickListener(
                 new View.OnClickListener()
                 {

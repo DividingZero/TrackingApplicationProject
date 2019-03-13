@@ -19,6 +19,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Notifications extends AppCompatActivity {
+
+    // Initializing variables
     private ListView list_view;
     private NotificationManager myNotificationManager;
     private int notificationIdOne = 111;
@@ -28,20 +30,35 @@ public class Notifications extends AppCompatActivity {
     private String dummyTitle = "TitleNotFound!";
     private String dummyMessage = "Congratulations for your achievement! " + (MainActivity.achievement/10) + " Steps!";
 
+    // onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Initializing layout
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
+
+        // Initializing listview which points to notifications_ListViewID
         list_view = (ListView) findViewById(R.id.notifications_ListViewID);
+
+        // Initializing ArrayList for storing strings for achievements
         ArrayList<String> arrayList=new ArrayList<>();
+
+        // Greeting users with messaage if achievements value is 100
         if(MainActivity.achievement==100){
             arrayList.add("Welcome to the notifications tab!");
         }
         else {
+
+            // Since achievements is not it's default value, we know that it has been activated and display the notification on arrayAdapter
             arrayList.add("Congratulations for reaching " + MainActivity.achievement / 10 + " steps!");
             ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
             list_view.setAdapter(arrayAdapter);
+
+            // Setting onItemClickListener for adapter
             list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                // When item is clicked it will go into notification
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     displayNotificationOne(dummyTitle, dummyMessage);
@@ -50,19 +67,6 @@ public class Notifications extends AppCompatActivity {
                 }
             });
         }
-       /* Button notOneBtn = (Button) findViewById(R.id.notificationOne);
-        notOneBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                displayNotificationOne(dummyTitle, dummyMessage);
-            }
-        });*/
-
-       /* Button notTwoBtn = (Button) findViewById(R.id.notificationTwo);
-        notTwoBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                displayNotificationTwo();
-            }
-        });*/
     }
 
 
@@ -100,51 +104,6 @@ public class Notifications extends AppCompatActivity {
         //pass the notification object to the system
         myNotificationManager.notify(notificationIdOne, mBuilder.build());
 
-    }
-
-    protected  void displayNotificationTwo() {
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "noti2");
-
-        mBuilder.setContentTitle("New Message with implicit intent");
-        mBuilder.setContentTitle("new message from psykoosi received");
-        mBuilder.setTicker("Implicit: New message Received");
-        mBuilder.setSmallIcon(R.drawable.ic_launcher_background); //place holder icon
-
-        NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
-
-        String[] events = new String[3];
-        events[0] = new String("1) Message for implicit intent");
-        events[1] = new String("2) big view Notification");
-        events[2] = new String("3) from psykoosi!");
-
-        //sets a title for the Inbox style big view
-        inboxStyle.setBigContentTitle("More Details:");
-        //moves events into the big view
-        for (int i = 0; i < events.length; i++) {
-            inboxStyle.addLine(events[i]);
-        }
-        mBuilder.setStyle(inboxStyle);
-
-        //increase the notification number every time a new noti arrives
-        mBuilder.setNumber(++numMessagesTwo);
-
-        //when the user presses the notification, it is auto-removed
-        mBuilder.setAutoCancel(true);
-
-        //creates an implicit intent
-        Intent resultIntent = new Intent("com.example.trackingapplicationproject.TEL_INTENT",
-                Uri.parse("tel : 123456789"));
-        resultIntent.putExtra("from", "psykoosi");
-
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(NotificationsTwo.class);
-
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_ONE_SHOT);
-        mBuilder.setContentIntent(resultPendingIntent);
-        myNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        myNotificationManager.notify(notificationIdTwo, mBuilder.build());
     }
 }
 /*

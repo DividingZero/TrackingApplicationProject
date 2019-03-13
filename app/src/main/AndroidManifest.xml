@@ -44,22 +44,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity
-            android:name=".NotificationsTwo"
-            android:label="Details of Notification Two"
-            android:parentActivityName=".MainActivity">
-            <intent-filter>
-                <action android:name="com.example.trackingapplicationproject.TEL_INTENT" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="tel" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
     </application>
 
 </manifest>
