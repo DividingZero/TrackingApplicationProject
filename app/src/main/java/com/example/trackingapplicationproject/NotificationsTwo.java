@@ -30,3 +30,7 @@ public class NotificationsTwo extends Activity {
     }
 
 }
+/*
+Source:
+https://examples.javacodegeeks.com/android/core/ui/notifications/android-notifications-example/
+ */

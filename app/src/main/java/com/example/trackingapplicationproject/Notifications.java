@@ -10,11 +10,16 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class Notifications extends AppCompatActivity {
-    //private ListView list_view;
+    private ListView list_view;
     private NotificationManager myNotificationManager;
     private int notificationIdOne = 111;
     private int notificationIdTwo = 112;
@@ -27,21 +32,47 @@ public class Notifications extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
-        //list_view = (ListView) findViewById(R.id.notifications_ListViewID);
-
-        Button notOneBtn = (Button) findViewById(R.id.notificationOne);
+        list_view = (ListView) findViewById(R.id.notifications_ListViewID);
+        ArrayList<String> arrayList=new ArrayList<>();
+        if(MainActivity.achievement==100){
+            arrayList.add("Welcome to the notifications tab!");
+        }
+        else {
+            arrayList.add("Congratulations for reaching " + MainActivity.achievement / 10 + " steps!");
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
+            list_view.setAdapter(arrayAdapter);
+            list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    displayNotificationOne(dummyTitle, dummyMessage);
+                    Intent intent = new Intent(Notifications.this,NotificationsOne.class);
+                    startActivity(intent);
+                }
+            });
+        }
+       /* Button notOneBtn = (Button) findViewById(R.id.notificationOne);
         notOneBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 displayNotificationOne(dummyTitle, dummyMessage);
             }
-        });
+        });*/
 
-        Button notTwoBtn = (Button) findViewById(R.id.notificationTwo);
+       /* Button notTwoBtn = (Button) findViewById(R.id.notificationTwo);
         notTwoBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 displayNotificationTwo();
             }
-        });
+        });*/
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /*list_view = (ListView) findViewById(R.id.notifications_ListViewID);
+        ArrayList<String> arrayList=new ArrayList<>();
+        ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
+        list_view.setAdapter(arrayAdapter);
+        arrayList.add("Congratulations for reaching " + MainActivity.achievement / 10 + " steps!");*/
     }
 
     public void displayNotificationOne(String title, String message) {
@@ -125,5 +156,7 @@ public class Notifications extends AppCompatActivity {
         myNotificationManager.notify(notificationIdTwo, mBuilder.build());
     }
 }
-
-
+/*
+Source:
+https://examples.javacodegeeks.com/android/core/ui/notifications/android-notifications-example/
+ */

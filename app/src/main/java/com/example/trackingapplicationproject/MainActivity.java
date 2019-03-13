@@ -110,11 +110,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             stepValue = event.values[0];
             if(stepValue>achievement){
 
-             //   congratulationsMessage = "Congratulations for reaching " + achievement + " steps!";
-
-             //   Notifications not = new Notifications();
-
-             //   not.displayNotificationOne("Congratulations!", congratulationsMessage);
                 achievement *= 10;
 
             }

@@ -16,16 +16,19 @@ public class NotificationsOne extends Activity {
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
-            s = "error";
+            s = "Congratulations for reaching " + (MainActivity.achievement/10) + " steps!";
         } else {
             id = extras.getInt("notificationId");
         }
         TextView t = (TextView) findViewById(R.id.text1);
-        s = s + " with id = " + id;
-        t.setText(s);
+        t.setText(s + " Next goal is " + MainActivity.achievement + "!");
         NotificationManager myNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         // removes the notification with the specific id
         myNotificationManager.cancel(id);
     }
 }
+/*
+Source:
+https://examples.javacodegeeks.com/android/core/ui/notifications/android-notifications-example/
+ */
