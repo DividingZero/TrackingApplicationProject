@@ -65,15 +65,6 @@ public class Notifications extends AppCompatActivity {
         });*/
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        /*list_view = (ListView) findViewById(R.id.notifications_ListViewID);
-        ArrayList<String> arrayList=new ArrayList<>();
-        ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,arrayList);
-        list_view.setAdapter(arrayAdapter);
-        arrayList.add("Congratulations for reaching " + MainActivity.achievement / 10 + " steps!");*/
-    }
 
     public void displayNotificationOne(String title, String message) {
         //default notification service
