@@ -11,7 +11,7 @@ public class NotificationsOne extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noti1);
-        CharSequence s = "Inside the activity of Notification one ";
+        CharSequence s = "Congratulations for reaching " + (MainActivity.achievement/10) + " steps!";
         int id = 0;
 
         Bundle extras = getIntent().getExtras();
@@ -21,7 +21,7 @@ public class NotificationsOne extends Activity {
             id = extras.getInt("notificationId");
         }
         TextView t = (TextView) findViewById(R.id.text1);
-        s = s + "with id = " + id;
+        s = s + " with id = " + id;
         t.setText(s);
         NotificationManager myNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

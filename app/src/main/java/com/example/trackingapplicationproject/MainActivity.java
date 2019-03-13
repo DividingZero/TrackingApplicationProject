@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     TextView stepcount, kilometers, calories, timerunning, averagespeed;
     public static long startTime;
     SensorManager sensorManager;
-    private float stepValue, achievement;
+    private float stepValue, timeValue;
+    private String congratulationsMessage;
+    public static float achievement = 100;
 
     boolean running = false;
     private Button notifications_button;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        achievement = 1000;
+        achievement = 100;
         TextView date = (TextView)findViewById(R.id.currentDate);
         startTime = SystemClock.elapsedRealtime();
         stepcount = (TextView) findViewById(R.id.stepCount);
@@ -89,19 +91,36 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         Log.d("Debug", "onSensorChanged method");
         if(running){
+            timeValue = (SystemClock.elapsedRealtime() - startTime);
+            if(timeValue<=(60/1000)){
 
+                timerunning.setText(String.valueOf((SystemClock.elapsedRealtime() - startTime) / 1000 + " s"));
+
+            }
+            else if(timeValue>=(3599/1000)){
+
+                timerunning.setText(String.valueOf(((SystemClock.elapsedRealtime() - startTime) / 1000) / 60 + " min"));
+
+            }
+            else{
+
+                timerunning.setText(String.valueOf((((SystemClock.elapsedRealtime() - startTime) / 1000) / 60) / 60 + " h"));
+
+            }
             stepValue = event.values[0];
             if(stepValue>achievement){
 
-                Notifications not = new Notifications();
+             //   congratulationsMessage = "Congratulations for reaching " + achievement + " steps!";
 
-                not.displayNotificationOne("Congratulations!", "Congratulations for reaching " + achievement + " steps!");
+             //   Notifications not = new Notifications();
+
+             //   not.displayNotificationOne("Congratulations!", congratulationsMessage);
                 achievement *= 10;
+
             }
             stepcount.setText(String.valueOf(event.values[0]));
             kilometers.setText(String.valueOf(event.values[0]/1312) + " km");
             calories.setText(String.valueOf(event.values[0]*0.05) + " cal");
-            timerunning.setText(String.valueOf((SystemClock.elapsedRealtime() - startTime) / 1000 + " s"));
             averagespeed.setText(String.valueOf(((event.values[0]/1312)/((SystemClock.elapsedRealtime() - startTime) / 1000) * 3600 )) + " km/h");
 
 

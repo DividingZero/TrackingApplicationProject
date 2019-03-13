@@ -21,7 +21,7 @@ public class Notifications extends AppCompatActivity {
     private int numMessagesOne = 0;
     private int numMessagesTwo = 0;
     private String dummyTitle = "TitleNotFound!";
-    private String dummyMessage = "MessageNotFound!";
+    private String dummyMessage = "Congratulations for your achievement! " + (MainActivity.achievement/10) + " Steps!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class Notifications extends AppCompatActivity {
         });
     }
 
-    protected void displayNotificationOne(String title, String message) {
+    public void displayNotificationOne(String title, String message) {
         //default notification service
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "noti1");
 
