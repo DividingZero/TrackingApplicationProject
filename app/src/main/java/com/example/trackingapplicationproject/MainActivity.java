@@ -214,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 // Calculate kilometers and meters and check which one is appropriate to display
                 distanceCast = (int) (event.values[0] / 1.312);
 
+
                 if (event.values[0] < 1312) {
 
                     kilometers.setText(String.valueOf(distanceCast) + " m");
@@ -224,8 +225,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
                 }
 
-                // Set the relative value of calorieCast to kilometers
-                calorieCast = distanceCast/1000;
+
 
                 // If the user hasn't inputted their weight, the weightInput variable will default to 60kg
                 if(weightInput==0){
@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
 
                 // Calculate calories and display them on the activity
-                calories.setText(String.valueOf(calorieCast * 0.91 * weightInput) + " cal");
+                calories.setText(String.valueOf((distanceCast/1000.0) * 0.91 * weightInput) + " cal");
 
                 // Calculate speed and display it on the activity
                 speedCast = (int) ((event.values[0] / 1312) / ((SystemClock.elapsedRealtime() - startTime) / 1000) * 3600);
